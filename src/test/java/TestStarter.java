@@ -2,6 +2,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -31,7 +32,7 @@ public class TestStarter {
     driver.close();
     driver.quit();
   }
-
+  @Disabled
   @Test
   @DisplayName("catalogContentMenuCheck")
   public void testCatalogContentMenu() {
@@ -69,7 +70,7 @@ public class TestStarter {
     assertThat(element9.isDisplayed()).overridingErrorMessage(()
         -> "Element not found.").isTrue();
   }
-
+  @Disabled
   @Test
   @DisplayName("computersAndNetworkMenuCheck")
   public void testComputersAndNetworkMenu() {
@@ -106,18 +107,19 @@ public class TestStarter {
             ("//span[contains(text(),'Компьютеры и')]"))).click();
     WebElement link = (new WebDriverWait(driver, 4)).until(ExpectedConditions.
         presenceOfElementLocated(By.xpath
-            ("//*[@class='catalog-navigation-list__aside-title'"
+            ("//div[@class='catalog-navigation-list__aside-title'"
                 + " and contains(text(), 'Комплектующие')]")));
     Actions actions = new Actions(driver);
     actions.moveToElement(link).perform();
     WebElement element = (new WebDriverWait(driver, 4)).until(ExpectedConditions.
         presenceOfElementLocated(By.xpath
-            ("//*[@class='catalog-navigation-list__dropdown-title']")));
+            ("//div[@class='catalog-navigation-list__dropdown']"
+                + "//span[@class='catalog-navigation-list__dropdown-title']")));
     assertThat(element.isDisplayed()).overridingErrorMessage(()
-        -> "Element 1 not found.").isTrue();
+           -> "Element 1 not found.").isTrue();
     WebElement element1 = driver.findElement(By.xpath
-        ("//*[@class='catalog-navigation-list__dropdown-description']"));
+            ("//*[@class='catalog-navigation-list__dropdown-description']"));
     assertThat(element1.isDisplayed()).overridingErrorMessage(()
-        -> "Element 2 not found.").isTrue();
+           -> "Element 2 not found.").isTrue();
   }
 }
