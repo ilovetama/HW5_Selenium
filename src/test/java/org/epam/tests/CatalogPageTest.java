@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-public class CatalogPageSectionsTest {
+public class CatalogPageTest extends BaseTest{
 
   private final OnlinerHomePage onlinerHomePage = new OnlinerHomePage();
 
@@ -50,7 +50,7 @@ public class CatalogPageSectionsTest {
         .clickOnCatalogLink()
         .clickOnCatalogClassifierLink("Компьютеры и\u00a0сети")
         .selectCategory("Комплектующие")
-        .getTitleOfProduct();
+        .getDescriptionOfProduct();
     assertThat(productTitle)
         .as("Product title is not displayed")
         .isNotEmpty();

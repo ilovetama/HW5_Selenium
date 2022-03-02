@@ -1,10 +1,10 @@
 package org.epam.training.pageobject;
 
 import java.util.List;
-import org.epam.training.framework.AbstractPage;
+import org.epam.training.framework.BasePage;
 import org.openqa.selenium.By;
 
-public class CatalogPage extends AbstractPage {
+public class CatalogPage extends BasePage {
 
   private static final String CATALOG_ITEM_TITLE =
       "//*[@class = 'catalog-navigation-classifier__item-title-wrapper']";
@@ -21,13 +21,10 @@ public class CatalogPage extends AbstractPage {
           + "div[@class='catalog-navigation-list__dropdown']"
           + "//a//*[contains(@class, 'title')]";
   private static final String PRODUCT_DESCRIPTION =
-      "//*[@class='catalog-navigation-list__aside-title' and contains(text(),"
-          + " 'омплектующие')]//following-sibling::"
-          + "div[@class='catalog-navigation-list__dropdown']"
-          + "//a//*[contains(@class, 'description')]";
-//  private static final String PRODUCT_LINK_XPATH_PATTERN =
-//      "//*[contains(@class, 'item_active')]//a[.//*[contains(text(), '%s')]]";
-
+      "//*[@class='catalog-navigation-list__aside-title' and contains(text(),'Комплектующие')]"
+          + "//following-sibling::div[@class='catalog-navigation-list__dropdown']"
+          + "//a//span[contains(@class, 'list__dropdown-description')"
+          + " and contains(text(), 'товар')]";
 
   public List<String> getCatalogItemTitle() {
     return getTextsFromWebElements(waitForElementsVisible(By.xpath
@@ -61,10 +58,4 @@ public class CatalogPage extends AbstractPage {
         .click();
     return this;
   }
-
-//  public ProductPage selectProduct(String product) {
-//    waitForElementVisible(By.xpath(String.format(PRODUCT_LINK_XPATH_PATTERN, product)))
-//        .click();
-//  }
-
 }
