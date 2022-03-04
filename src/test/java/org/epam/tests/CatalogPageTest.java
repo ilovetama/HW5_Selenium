@@ -27,13 +27,13 @@ public class CatalogPageTest extends BaseTest {
 
   @Test
   @Tag("test3")
-  public void testComponentsSectionContentIsVisible() {
+  public void testComponentsSectionTitleAndDescriptionIsVisible() {
     Collection<String> productTitles = onlinerHomePage
         .clickOnCatalogLink()
         .clickOnCatalogClassifierLink("Компьютеры и\u00a0сети")
         .selectCategory("Комплектующие")
         .getProductTitles();
-    assertThat(productTitles)
+    softAssertions.assertThat(productTitles)
         .as("Product title is not displayed")
         .isNotEmpty();
     Collection<String> productDescriptions = catalogPage.getProductDescriptions();

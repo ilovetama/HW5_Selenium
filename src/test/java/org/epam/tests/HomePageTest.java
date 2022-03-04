@@ -15,7 +15,7 @@ public class HomePageTest extends BaseTest {
 
   @Test
   @Tag("test1")
-  public void testCatalogItemTitle() {
+  public void testCatalogItemTitleIsVisible() {
     Collection<String> catalogItems = onlinerHomePage
         .clickOnCatalogLink()
         .getCatalogItemTitle();
