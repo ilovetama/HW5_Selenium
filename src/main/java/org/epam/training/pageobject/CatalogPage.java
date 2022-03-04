@@ -18,12 +18,15 @@ public class CatalogPage extends BasePage {
   private static final String CATALOG_CLASSIFIER_CATEGORY_XPATH_PATTERN =
       "//*[@class='catalog-navigation-list__aside-title' and contains(text(), '%s')]";
   private static final String PRODUCT_TITLE =
-      "//span[@class='catalog-navigation-list__dropdown-title']";
-  private static final String PRODUCT_DESCRIPTION =
-      "//*[@class='catalog-navigation-list__aside-title' and contains(text(),'Комплектующие')]"
+      "//div[@class='catalog-navigation-list__aside-title' and contains(text(),"
+          + " 'Комплектующие') and not (contains(text(), 'Комплектующие для'))]"
           + "//following-sibling::div[@class='catalog-navigation-list__dropdown']"
-          + "//a//span[contains(@class, 'list__dropdown-description')"
-          + " and contains(text(), 'товар')]";
+          + "//a//*[contains(@class, 'title')]";
+  private static final String PRODUCT_DESCRIPTION =
+      "//div[@class='catalog-navigation-list__aside-title' and contains(text(),"
+          + " 'Комплектующие') and not (contains(text(), 'Комплектующие для'))]"
+          + "//following-sibling::div[@class='catalog-navigation-list__dropdown']"
+          + "//a//*[contains(@class, 'description') and contains(text(), 'товар')]";
 
   private static Collection<String> catalogItemTitles() {
     Collection<String> collection = new ArrayList<>();
@@ -73,12 +76,12 @@ public class CatalogPage extends BasePage {
         (CATALOG_MENU_ITEM_TITLE)));
   }
 
-  public List<String> getProductTitles() {
+  public Collection<String> getProductTitles() {
     return getTextsFromWebElements(waitForElementsVisible(By.xpath
         (PRODUCT_TITLE)));
   }
 
-  public List<String> getProductDescriptions() {
+  public Collection<String> getProductDescriptions() {
     return getTextsFromWebElements(waitForElementsVisible(By.xpath
         (PRODUCT_DESCRIPTION)));
   }

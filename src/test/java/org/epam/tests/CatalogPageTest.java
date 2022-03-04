@@ -3,7 +3,6 @@ package org.epam.tests;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 import java.util.Collection;
-import java.util.List;
 import org.epam.training.pageobject.CatalogPage;
 import org.epam.training.pageobject.OnlinerHomePage;
 import org.junit.jupiter.api.Tag;
@@ -21,8 +20,6 @@ public class CatalogPageTest extends BaseTest {
         .clickOnCatalogLink()
         .clickOnCatalogClassifierLink("Компьютеры и\u00a0сети")
         .getMenuItemTitle();
-    System.out.println(menuItemTitles);
-    System.out.println(catalogPage.getComputersAndNetworkMenuItemsCollection());
     assertThat(menuItemTitles.containsAll(catalogPage.getComputersAndNetworkMenuItemsCollection()))
         .as("Menu item`s title is not displayed")
         .isTrue();
@@ -31,7 +28,7 @@ public class CatalogPageTest extends BaseTest {
   @Test
   @Tag("test3")
   public void testComponentsSectionContentIsVisible() {
-    List<String> productTitles = onlinerHomePage
+    Collection<String> productTitles = onlinerHomePage
         .clickOnCatalogLink()
         .clickOnCatalogClassifierLink("Компьютеры и\u00a0сети")
         .selectCategory("Комплектующие")
@@ -39,11 +36,9 @@ public class CatalogPageTest extends BaseTest {
     assertThat(productTitles)
         .as("Product title is not displayed")
         .isNotEmpty();
-    List<String> productDescriptions = catalogPage.getProductDescriptions();
+    Collection<String> productDescriptions = catalogPage.getProductDescriptions();
     assertThat(productDescriptions)
         .as("Product description is not displayed")
         .isNotEmpty();
-    System.out.println(productTitles);
-    System.out.println(productDescriptions);
   }
 }
